@@ -44,7 +44,7 @@ public class TimeRoute extends RouteBuilder {
         // from("direct:product-list")
         from("timer:timer-test?period=3000")
         .log("${body}")
-        .to("rest://get:/listar?host=localhost:8001")
+        .to("rest://get:{{config.client.product-service.uri}}?host={{config.client.product-service.host}}")
         .log("${body}")
         .choice()
             .when(simple("${headers.CamelHttpResponseCode} contains '200'"))
@@ -52,7 +52,7 @@ public class TimeRoute extends RouteBuilder {
                 .unmarshal()
                 .json(JsonLibrary.Jackson, Products.class) //transform
                 .split(body())
-                    .log("producto : ${body.cobre.toString}")
+                    .log("producto : ${body.cobre.key}")
                     .endChoice()
             .otherwise()
                 .to("direct:log-primary", "direct:log-secondary")

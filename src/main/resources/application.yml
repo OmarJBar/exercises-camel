@@ -1,2 +1,9 @@
 server:
-    port: 8003
+  port: 8003
+
+
+config:
+  client:
+    product-service:
+      host: "localhost:8001"
+      uri: "/listar"
