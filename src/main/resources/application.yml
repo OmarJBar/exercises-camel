@@ -6,4 +6,6 @@ config:
   client:
     product-service:
       host: "localhost:8001"
-      uri: "/listar"
+      uriList: "/listar"
+      uriValues: "/buscar/"
+      uriValuesDate: "/buscar/{key}/{date}"
